@@ -1,0 +1,210 @@
+1] //C PROGRAM FOR INSERTION SORT
+#include <math.h>
+#include <stdio.h>
+void insertionSort(int arr[], int n)
+{
+	int i, key, j;
+	for (i = 1; i < n; i++)
+	{
+		key = arr[i];
+		j = i - 1;
+		while (j >= 0 && arr[j] > key)
+		{
+			arr[j + 1] = arr[j];
+			j = j - 1;
+		}
+		arr[j + 1] = key;
+	}
+}
+
+void printArray(int arr[], int n)
+{
+	int i;
+	for (i = 0; i < n; i++)
+		printf("%d ", arr[i]);
+	printf("\n");
+}
+
+int main()
+{
+	int arr[] = {12, 11, 13, 5, 6};
+	int n = sizeof(arr) / sizeof(arr[0]);
+
+	insertionSort(arr, n);
+	printArray(arr, n);
+  return 0;
+}
+
+ALGORITHM
+Step 1 - If the element is the first element, assume that it is already sorted. Return 1.
+
+Step2 - Pick the next element, and store it separately in a key.
+
+Step3 - Now, compare the key with all elements in the sorted array.
+
+Step 4 - If the element in the sorted array is smaller than the current element, then move to the next element. Else, shift greater elements in the array towards the right.
+
+Step 5 - Insert the value.
+
+Step 6 - Repeat until the array is sorted.
+
+TIME COMPLEXITY
+Best Case:O(n)
+Average Case:O(n2)
+Worst Case:O(n2)
+
+
+2] //C PROGRAM FOR LINEAR SEARCH
+// C code to linearly search x in arr[].
+#include <stdio.h>
+
+int search(int arr[], int N, int x)
+{
+	for (int i = 0; i < N; i++)
+		if (arr[i] == x)
+			return i;
+	return -1;
+}
+
+// Driver code
+int main(void)
+{
+	int arr[] = { 2, 3, 4, 10, 40 };
+	int x = 10;
+	int N = sizeof(arr) / sizeof(arr[0]);
+
+	// Function call
+	int result = search(arr, N, x);
+	(result == -1)
+		? printf("Element is not present in array")
+		: printf("Element is present at index %d", result);
+	return 0;
+}
+
+ALGORITHM
+Linear Search ( Array A, Value x)
+
+Step 1: Set i to 1
+Step 2: if i > n then go to step 7
+Step 3: if A[i] = x then go to step 6
+Step 4: Set i to i + 1
+Step 5: Go to Step 2
+Step 6: Print Element x Found at index i and go to step 8
+Step 7: Print element not found
+Step 8: Exit
+
+TIME COMPLEXITY
+Best Case:O(1)
+Average Case:O(n)
+Worst Case:O(n)
+
+
+3] //C PROGRAM FOR SELECTION SORT
+#include <stdio.h>
+int main()
+{
+    int n = 10;
+    int a[] = {3,2,6,5,4,7,8,9,5,1};
+    int min_index;
+    for(int i = 0; i < n - 1; i++) {
+        min_index = i;
+        for(int j = i + 1; j < n; j++) {
+            if(a[min_index] > a[j]) {
+                min_index = j;
+            }
+        }
+        if(min_index != i)
+        {
+            int temp = a[i];
+            a[i] = a[min_index];
+            a[min_index] = temp;
+        }
+    }
+    printf("Sorted Array: ");
+    for(int i = 0; i < n; i++)  {
+        printf(" %d", a[i]);
+    }
+    return 0;
+}
+
+ALGORITHM
+Step1:Make a variable (say min_index) and initialize it to the location 0 of the array.
+Step2:Traverse the whole array to find the smallest element in the array.
+Step3:While traversing the array, if we find an element that is smaller than min_index then swap both these elements.
+Step4:After which, increase the min_index by 1 so that it points to the next element of the array.
+Step5:Repeat the above process until the whole array is sorted.
+
+TIME COMPLEXITY
+Best Case:O(n2)
+Average Case:O(n2)
+Worst Case:O(n2)
+
+
+4] //C PROGRAM FOR BUBBLE SORT
+    #include <stdio.h>  
+      
+    void bubble_sort(int arr[], int n) {  
+      int i, j;  
+      for (i = 0; i < n - 1; i++) {  
+        for (j = 0; j < n - i - 1; j++) {  
+          if (arr[j] > arr[j + 1]) {  
+            int temp = arr[j];  
+            arr[j] = arr[j + 1];  
+            arr[j + 1] = temp;  
+          }  
+        }  
+      }  
+    }  
+    int main() {  
+      int arr[] = {64, 34, 25, 12, 22, 11, 90};  
+      int n = sizeof(arr) / sizeof(arr[0]);  
+      bubble_sort(arr, n);  
+      printf("Sorted array: ");  
+      for (int i = 0; i < n; i++) {  
+        printf("%d ", arr[i]);  
+      }  
+      return 0;  
+    }  
+
+ALGORITHM
+Step1:Starting with the first element(index = 0), compare the current element with the next element of the array.
+Step2:If the current element is greater than the next element of the array, swap them.
+Step3:If the current element is less than the next element, move to the next element. Repeat Step 1.
+
+TIME COMPLEXITY
+Best Case:O(n)
+Average Case:O(n2)
+Worst Case:O(n2)
+
+
+5] //C PROGRAM TO FIND GCD BY APPLYING EUCLID'S FORMULA
+// C program to demonstrate Basic Euclidean Algorithm
+#include <stdio.h>
+
+// Function to return gcd of a and b
+int gcd(int a, int b)
+{
+	if (a == 0)
+		return b;
+	return gcd(b % a, a);
+}
+
+// Driver program to test above function
+int main()
+{
+	int a = 10, b = 15;
+	printf("GCD(%d, %d) = %d\n", a, b, gcd(a, b));
+	a = 35, b = 10;
+	printf("GCD(%d, %d) = %d\n", a, b, gcd(a, b));
+	return 0;
+}
+
+ALGORITHM
+Step1:Take two numbers as input.
+Step2:Find the greater of the two numbers.
+Step3:Keep on dividing the greater number by the smaller number until remainder becomes 0.
+Step4:When the remainder becomes 0 print the smaller number i.e., the denominator as the output.
+Step5:Exit
+
+TIME COMPLEXITY
+Time Complexity: O(min(a, b))
