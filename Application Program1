@@ -1,0 +1,63 @@
+An attendance register is commonly used to keep track of students'
+presence in a class or an event. Sorting the names in the attendance
+register alphabetically is essential for easy access and analysis. The
+task is to develop a program that takes a list of names in an
+attendance register as input and sorts them alphabetically using the
+quick sort algorithm. The program should read the names from a file
+or accept user input, sort them, and display the sorted list of names.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void swap(char** a, char** b) {
+    char* temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int partition(char** names, int low, int high) {
+    char* pivot = names[high];
+    int i = low - 1;
+
+    for (int j = low; j <= high - 1; j++) {
+        if (strcmp(names[j], pivot) < 0) {
+            i++;
+            swap(&names[i], &names[j]);
+        }
+    }
+    swap(&names[i + 1], &names[high]);
+    return i + 1;
+}
+
+void quickSort(char** names, int low, int high) {
+    if (low < high) {
+        int pi = partition(names, low, high);
+        quickSort(names, low, pi - 1);
+        quickSort(names, pi + 1, high);
+    }
+}
+
+int main() {
+    int num_names;
+    printf("Enter the number of names: ");
+    scanf("%d", &num_names);
+
+    char** names = (char*)malloc(num_names * sizeof(char));
+    for (int i = 0; i < num_names; i++) {
+        names[i] = (char*)malloc(100 * sizeof(char));
+        printf("Enter name %d: ", i + 1);
+        scanf("%s", names[i]);
+    }
+
+    quickSort(names, 0, num_names - 1);
+
+    printf("\nSorted list of names:\n");
+    for (int i = 0; i < num_names; i++) {
+        printf("%s\n", names[i]);
+        free(names[i]);
+    }
+    free(names);
+
+    return 0;
+}
