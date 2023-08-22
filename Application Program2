@@ -1,0 +1,113 @@
+A contact list often contains mobile numbers that need to be sorted
+for easy access and management. The task is to develop a program
+that takes a list of mobile numbers in a contact list as input and sorts
+them using the merge sort algorithm. The program should read the
+mobile numbers from a file or accept user input, sort them, and
+display the sorted list of mobile numbers.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Function to merge two sorted arrays
+void merge(char** arr, int left, int mid, int right) {
+    int i, j, k;
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+    
+    // Create temporary arrays
+    char** L = (char*)malloc(n1 * sizeof(char));
+    char** R = (char*)malloc(n2 * sizeof(char));
+    
+    for (i = 0; i < n1; i++)
+        L[i] = arr[left + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[mid + 1 + j];
+    
+    i = 0;
+    j = 0;
+    k = left;
+    
+    while (i < n1 && j < n2) {
+        if (strcmp(L[i], R[j]) <= 0) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+    
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+    
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+    
+    free(L);
+    free(R);
+}
+
+// Merge sort function
+void mergeSort(char** arr, int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+        
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        
+        merge(arr, left, mid, right);
+    }
+}
+
+int main() {
+    int n;
+    char filename[100];
+    
+    printf("Enter the name of the file containing mobile numbers: ");
+    scanf("%s", filename);
+    
+    FILE* file = fopen(filename, "r");
+    if (file == NULL) {
+        printf("File not found.\n");
+        return 1;
+    }
+    
+    // Count the number of lines in the file
+    n = 0;
+    char c;
+    while ((c = fgetc(file)) != EOF) {
+        if (c == '\n') {
+            n++;
+        }
+    }
+    fseek(file, 0, SEEK_SET);
+    
+    char** mobile_numbers = (char*)malloc(n * sizeof(char));
+    for (int i = 0; i < n; i++) {
+        mobile_numbers[i] = (char*)malloc(20 * sizeof(char)); // Assuming a maximum of 20 characters per number
+        fscanf(file, "%s", mobile_numbers[i]);
+    }
+    
+    fclose(file);
+    
+    // Sort the mobile numbers
+    mergeSort(mobile_numbers, 0, n - 1);
+    
+    printf("Sorted mobile numbers:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%s\n", mobile_numbers[i]);
+        free(mobile_numbers[i]);
+    }
+    
+    free(mobile_numbers);
+    
+    return 0;
+}
