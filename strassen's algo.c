@@ -68,3 +68,12 @@ After multiplication using Strassen's algorithm
 19      22
 43      50
 time complexity:O(n^3)
+
+
+  ALGORITHM:
+Algorithm: Matrix-Multiplication (X, Y, Z) 
+for i = 1 to p do 
+   for j = 1 to r do 
+      Z[i,j] := 0 
+      for k = 1 to q do 
+         Z[i,j] := Z[i,j] + X[i,k] × Y[k,j] 
