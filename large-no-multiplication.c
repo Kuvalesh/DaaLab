@@ -46,3 +46,16 @@ Product: 14482649025
 
 TIME COMPLEXITY:
 T(n) = O(n^2 * log(n))
+
+
+    ALGORITHM:
+
+Step 1 : Multiply index i of B with all the indexes j of A. Add the product to value in Ans[k] where 0 <= i < L2, 0 <= j < L1, k = i+j.
+Step 2 : Repeat step 1 till i = L2. (Picture how you multiply two large numbers on a paper).
+Step 3 :
+for each i in range(0,L1+L2)
+TMP = X/10. X = X%10. Y = Y+TMP.
+X = A[i]
+Y = A[i+1]
+TMP = temporary variable.
+Step 4 : reverse the array Ans, and that will be the final product.
