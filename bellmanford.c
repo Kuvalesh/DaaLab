@@ -210,3 +210,24 @@ The Insert_Edge function is used to insert edges into the linked list.
 It allocates memory for a new edge, sets its source and destination, and appends it to the linked list.
 The program provides a basic implementation of the Bellman-Ford algorithm to find the shortest path in a directed
 weighted graph and is designed to work with a specific graph structure and input format.
+
+
+ALGORITHM:
+function bellmanFord(G, S)
+  for each vertex V in G
+    distance[V] <- infinite
+      previous[V] <- NULL
+  distance[S] <- 0
+
+  for each vertex V in G				
+    for each edge (U,V) in G
+      tempDistance <- distance[U] + edge_weight(U, V)
+      if tempDistance < distance[V]
+        distance[V] <- tempDistance
+        previous[V] <- U
+
+  for each edge (U,V) in G
+    If distance[U] + edge_weight(U, V) < distance[V}
+      Error: Negative Cycle Exists
+
+  return distance[], previous[]
