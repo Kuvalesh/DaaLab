@@ -43,3 +43,20 @@ void main() {
 	  printf("\n The pattern was not found in the given text\n");
 	getch();
 }
+
+ALGORITHM:
+ALGORITHM Horspool(P[0…m-1], T[0…n-1])
+//Implement Horspool’s algorithm for string matching
+//Input: Pattern P[0…m-1] and text T[0…n-1]
+//Output: The position of first matching, if successful, otherwise, -1
+ShiftTable(P[0…m-1])
+i←m-1
+while i ≤ n-1 do
+k ← 0
+while k ≤ m-1 and P[m-1-k] ==T[i-k]
+k ← k+1
+if k==m
+return i-m+1
+else
+i ← i+ Table[T[i]]
+return -1
